@@ -88,6 +88,7 @@ namespace RPMI.hooks
                     break;
             }
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(driver);
+            _scenarioContext.ScenarioContainer.RegisterInstanceAs(scenario);
         }
 
 
@@ -95,8 +96,9 @@ namespace RPMI.hooks
         public void AfterStep(ScenarioContext context)
         {
             var stepType = context.StepContext.StepInfo.StepDefinitionType.ToString();
+            scenario = context.ScenarioContainer.Resolve<ExtentTest>();
 
-            if (context.StepContext.TestError == null)
+            if (context.TestError == null)
             {
                 switch (stepType)
                 {
@@ -115,7 +117,7 @@ namespace RPMI.hooks
 
                 }
             }
-            else if (context.StepContext.TestError != null)
+            else if (context.TestError != null)
             {
                 switch (stepType)
                 {
@@ -134,9 +136,6 @@ namespace RPMI.hooks
 
                 }
             }
-
-
-            scenario.CreateNode<Given>(context.StepContext.StepInfo.Text);
         }
 
         [AfterScenario]

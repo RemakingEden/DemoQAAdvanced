@@ -16,7 +16,7 @@ namespace RPMI.step_definitions
     public class LoginSteps
     {
 
-        string baseUrl = "https://google.com";
+        string baseUrl = "https://demoqa.com/";
         private LoginPage LoginPage { get; set; }
         public IObjectContainer container { get; private set; }
         public IWebDriver driver { get; private set; }
