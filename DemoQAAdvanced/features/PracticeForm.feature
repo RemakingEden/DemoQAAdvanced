@@ -19,46 +19,17 @@ Feature: Practice Form
     Given a user is on the "/automation-practice-form" page
     When the user enters the email 'WrongFormat' 
     And the user clicks the submit button
-    Then athe email field validation is shown
+    Then the email field validation is shown
 
     Scenario: Letters in phone number shows validation error
     Given a user is on the "/automation-practice-form" page
     When the user enters the phone number 'WrongFormat' 
     And the user clicks the submit button
-    Then the phone number fields validation is shpwn
+    Then the phone number fields validation is shown
     
     Scenario: All fields filled allows form to be submitted
     Given a user is on the "/automation-practice-form" page
     When the user enters info into all fields
-    And the user clicks the submit button
-    Then the details entered are reflected correctly
-
-    Scenario: Uploading PNG is accepted
-    Given a user is on the "/automation-practice-form" page
-    When the user enters all mandatory fields
-    And the user uploads a 'PNG' file to the picture field
-    And the user clicks the submit button
-    Then the details entered are reflected correctly
-
-    Scenario: Uploading JPG is accepted
-    Given a user is on the "/automation-practice-form" page
-    When the user enters all mandatory fields
-    And the user uploads a 'JPG' file to the picture field
-    And the user clicks the submit button
-    Then the details entered are reflected correctly
-
-    Scenario: Uploading large picture is accepted
-    Given a user is on the "/automation-practice-form" page
-    When the user enters all mandatory fields
-    And the user uploads a 5MB+ file to the picture field
-    And the user clicks the submit button
-    Then the details entered are reflected correctly
-
-    Scenario: Can cancel picture upload and continue
-    Given a user is on the "/automation-practice-form" page
-    When the user enters all mandatory fields
-    And the user clicks to upload a picture
-    And the user clicks cancel on the picture upload modal
     And the user clicks the submit button
     Then the details entered are reflected correctly
 

@@ -5,11 +5,8 @@ using BoDi;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace RPMI.hooks
@@ -36,7 +33,10 @@ namespace RPMI.hooks
             //chromeOptions.AddArguments("headless");
             driver = new ChromeDriver(chromeOptions);
             driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Actions builder = new Actions(driver);
             container.RegisterInstanceAs<IWebDriver>(driver);
+            container.RegisterInstanceAs<Actions>(builder);
             return driver;
         }
 
@@ -122,13 +122,13 @@ namespace RPMI.hooks
                 switch (stepType)
                 {
                     case "Given":
-                        scenario.CreateNode<Given>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
+                        scenario.CreateNode<Given>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
                         break;
                     case "When":
-                        scenario.CreateNode<When>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
+                        scenario.CreateNode<When>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
                         break;
                     case "And":
-                        scenario.CreateNode<And>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
+                        scenario.CreateNode<And>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
                         break;
                     case "Then":
                         scenario.CreateNode<Then>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
