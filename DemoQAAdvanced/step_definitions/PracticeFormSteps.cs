@@ -11,8 +11,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using TechTalk.SpecFlow;
 
-[assembly: Parallelizable(ParallelScope.Fixtures)]
-
 namespace RPMI.step_definitions
 {
     [Binding]
