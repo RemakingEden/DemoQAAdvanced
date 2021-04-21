@@ -6,7 +6,7 @@ using DemoQAAdvanced.helper;
 using Microsoft.Extensions.Configuration;
 using TechTalk.SpecFlow;
 
-namespace RPMI.helper
+namespace DemoQAAdvanced.helper
 {
     [Binding]
     public sealed class ExtentReporting

@@ -1,5 +1,4 @@
 ﻿@Browser:Chrome
-@Browser:Firefox
 Feature: Practice Form
   As a user
   I want to be able to complete a form, so that I am able to send details to the site

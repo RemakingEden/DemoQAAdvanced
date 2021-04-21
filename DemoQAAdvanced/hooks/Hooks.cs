@@ -11,7 +11,7 @@ using OpenQA.Selenium.Interactions;
 using System;
 using TechTalk.SpecFlow;
 
-namespace RPMI.hooks
+namespace DemoQAAdvanced.hooks
 {
     [Binding]
     public sealed class Hooks

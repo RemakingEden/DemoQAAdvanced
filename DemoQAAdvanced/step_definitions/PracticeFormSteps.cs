@@ -6,12 +6,12 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using RPMI.pages;
+using DemoQAAdvanced.pages;
 using System.Text.RegularExpressions;
 using System.Threading;
 using TechTalk.SpecFlow;
 
-namespace RPMI.step_definitions
+namespace DemoQAAdvanced.step_definitions
 {
     [Binding]
     public class PracticeFormSteps
@@ -29,13 +29,6 @@ namespace RPMI.step_definitions
             config = container.Resolve<IConfiguration>();
             PracticeFormPage = new PracticeFormPage(driver);
         }
-
-        [Given(@"a user is on the ""(.*)"" page")]
-        public void GivenAUserIsOnThePage(string endpoint)
-        {
-            driver.Navigate().GoToUrl(config["BaseURL"] + endpoint);
-        }
-        
         
         [When(@"the user clicks the submit button")]
         public void WhenTheUserClicksTheSubmitButton()

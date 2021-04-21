@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace RPMI.pages
+namespace DemoQAAdvanced.pages
 {
     public class PracticeFormPage
     {

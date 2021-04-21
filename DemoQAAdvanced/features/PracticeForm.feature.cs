@@ -21,7 +21,6 @@ namespace DemoQAAdvanced.Features
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Practice Form")]
     [NUnit.Framework.CategoryAttribute("Browser:Chrome")]
-    [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
     public partial class PracticeFormFeature
     {
         
@@ -36,8 +35,7 @@ namespace DemoQAAdvanced.Features
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "features", "Practice Form", "  As a user\r\n  I want to be able to complete a form, so that I am able to send de" +
                     "tails to the site", ProgrammingLanguage.CSharp, new string[] {
-                        "Browser:Chrome",
-                        "Browser:Firefox"});
+                        "Browser:Chrome"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -93,23 +91,6 @@ namespace DemoQAAdvanced.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("All mandatory fields filled allows form to be submitted: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void AllMandatoryFieldsFilledAllowsFormToBeSubmitted_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All mandatory fields filled allows form to be submitted", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user enters info into all mandatory fields", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.And("the user clicks the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.Then("the details entered are reflected correctly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("All mandatory fields not filled shows validation error: Chrome")]
         [NUnit.Framework.CategoryAttribute("Browser:Chrome")]
         public virtual void AllMandatoryFieldsNotFilledShowsValidationError_Chrome()
@@ -126,22 +107,6 @@ namespace DemoQAAdvanced.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("All mandatory fields not filled shows validation error: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void AllMandatoryFieldsNotFilledShowsValidationError_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All mandatory fields not filled shows validation error", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user clicks the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.Then("all appropriate field validation messages are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("email wrong format shows validation error: Chrome")]
         [NUnit.Framework.CategoryAttribute("Browser:Chrome")]
         public virtual void EmailWrongFormatShowsValidationError_Chrome()
@@ -150,23 +115,6 @@ namespace DemoQAAdvanced.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("email wrong format shows validation error", null, ((string[])(null)), argumentsOfScenario);
             this.ScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.Add("Browser", "Chrome");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user enters the email \'WrongFormat\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.And("the user clicks the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.Then("the email field validation is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("email wrong format shows validation error: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void EmailWrongFormatShowsValidationError_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("email wrong format shows validation error", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
             this.ScenarioStart();
             testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
             testRunner.When("the user enters the email \'WrongFormat\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -193,23 +141,6 @@ namespace DemoQAAdvanced.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Letters in phone number shows validation error: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void LettersInPhoneNumberShowsValidationError_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Letters in phone number shows validation error", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user enters the phone number \'WrongFormat\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.And("the user clicks the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.Then("the phone number fields validation is shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("All fields filled allows form to be submitted: Chrome")]
         [NUnit.Framework.CategoryAttribute("Browser:Chrome")]
         public virtual void AllFieldsFilledAllowsFormToBeSubmitted_Chrome()
@@ -218,23 +149,6 @@ namespace DemoQAAdvanced.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All fields filled allows form to be submitted", null, ((string[])(null)), argumentsOfScenario);
             this.ScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.Add("Browser", "Chrome");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user enters info into all fields", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.And("the user clicks the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.Then("the details entered are reflected correctly", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("All fields filled allows form to be submitted: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void AllFieldsFilledAllowsFormToBeSubmitted_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All fields filled allows form to be submitted", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
             this.ScenarioStart();
             testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
             testRunner.When("the user enters info into all fields", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -261,23 +175,6 @@ namespace DemoQAAdvanced.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Can remove subjects individually: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void CanRemoveSubjectsIndividually_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Can remove subjects individually", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user enters five subjects", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.And("the user deletes two subjects individually", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.Then("three undeleted subjects remain", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Can remove all subjects: Chrome")]
         [NUnit.Framework.CategoryAttribute("Browser:Chrome")]
         public virtual void CanRemoveAllSubjects_Chrome()
@@ -286,23 +183,6 @@ namespace DemoQAAdvanced.Features
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Can remove all subjects", null, ((string[])(null)), argumentsOfScenario);
             this.ScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.Add("Browser", "Chrome");
-            this.ScenarioStart();
-            testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-            testRunner.When("the user enters five subjects", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-            testRunner.And("the user deletes all subjects with the remove all button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-            testRunner.Then("all subjects are removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Can remove all subjects: Firefox")]
-        [NUnit.Framework.CategoryAttribute("Browser:Firefox")]
-        public virtual void CanRemoveAllSubjects_Firefox()
-        {
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Can remove all subjects", null, ((string[])(null)), argumentsOfScenario);
-            this.ScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.Add("Browser", "Firefox");
             this.ScenarioStart();
             testRunner.Given("a user is on the \"/automation-practice-form\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
             testRunner.When("the user enters five subjects", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
