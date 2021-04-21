@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using System;
 
 namespace DemoQAAdvanced.pages
 {
@@ -8,8 +9,8 @@ namespace DemoQAAdvanced.pages
         private readonly IWebDriver driver;
         public PracticeFormPage(IWebDriver driver)
         {
-            this.driver = driver;
-            PageFactory.InitElements(this.driver, this);
+            this. driver = driver;
+            PageFactory.InitElements(driver, this);
         }
 
         // Text fields
@@ -33,10 +34,20 @@ namespace DemoQAAdvanced.pages
         public IWebElement State { get; set; }
         [FindsBy(How = How.Id, Using = "react-select-3-option-0")]
         public IWebElement NCRState { get; set; }
+        [FindsBy(How = How.Id, Using = "react-select-3-option-1")]
+        public IWebElement UttarPradeshState { get; set; }
+        [FindsBy(How = How.Id, Using = "react-select-3-option-2")]
+        public IWebElement HaryanaState { get; set; }
+        [FindsBy(How = How.Id, Using = "react-select-3-option-3")]
+        public IWebElement RajasthanState { get; set; }
         [FindsBy(How = How.Id, Using = "city")]
         public IWebElement City { get; set; }
         [FindsBy(How = How.Id, Using = "react-select-4-option-0")]
         public IWebElement DelhiCity { get; set; }
+        [FindsBy(How = How.Id, Using = "react-select-4-option-1")]
+        public IWebElement GurgaonCity { get; set; }
+        [FindsBy(How = How.Id, Using = "react-select-4-option-2")]
+        public IWebElement NoidaCity { get; set; }
 
         // Radio buttons
         [FindsBy(How = How.XPath, Using = "//*[@id='genterWrapper']/div[2]/div[1]/label")]
@@ -47,6 +58,10 @@ namespace DemoQAAdvanced.pages
         public IWebElement GenderOther { get; set; }
         [FindsBy(How = How.XPath, Using = @"//*[@id='hobbiesWrapper']/div[2]/div[1]/label")]
         public IWebElement HobbiesSports { get; set; }
+        [FindsBy(How = How.XPath, Using = @"//*[@id='hobbiesWrapper']/div[2]/div[2]/label")]
+        public IWebElement HobbiesReading { get; set; }
+        [FindsBy(How = How.XPath, Using = @"//*[@id='hobbiesWrapper']/div[2]/div[3]/label")]
+        public IWebElement HobbiesMusic { get; set; }
 
         // Picture upload
         [FindsBy(How = How.Id, Using = "uploadPicture")]
@@ -78,13 +93,99 @@ namespace DemoQAAdvanced.pages
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
-            this.SubmitBtn.Click();
+            SubmitBtn.Click();
         }
 
         public void InputSubject(string subject)
         {
-            this.Subjects.SendKeys(subject);
-            this.SubjectsOption1.Click();
+            Subjects.SendKeys(subject);
+            SubjectsOption1.Click();
         }
+
+        public void GenderSelection(string gender)
+        {
+            if (gender == "Male"){
+                GenderMale.Click();
+            } 
+            else if (gender == "Female")
+            {
+                GenderFemale.Click();
+            }
+            else if (gender == "Other")
+            {
+                GenderOther.Click();
+            }
+            else
+            {
+                throw new Exception("Gender must be Male/Female/Other");
+            }
+        }
+
+        public void HobbySelection(string hobby)
+        {
+            if (hobby == "Sports")
+            {
+                HobbiesSports.Click();
+            }
+            else if (hobby == "Reading")
+            {
+                HobbiesReading.Click();
+            }
+            else if (hobby == "Music")
+            {
+                HobbiesMusic.Click();
+            }
+            else
+            {
+                throw new Exception("Hobby must be Sports/Reading/Music");
+            }
+        }
+
+        public void StateSelection(string state)
+        {
+            State.Click();
+            if (state == "NCR")
+            {
+                NCRState.Click();
+            }
+            else if (state == "Uttar Pradesh")
+            {
+                UttarPradeshState.Click();
+            }
+            else if (state == "Haryana")
+            {
+                HaryanaState.Click();
+            }
+            else if (state == "Rajasthan")
+            {
+                RajasthanState.Click();
+            }
+            else
+            {
+                throw new Exception("State must be NCR/Uttar Pradesh/Haryana/Rajasthan");
+            }
+        }
+
+        public void CitySelection(string city)
+        {
+            City.Click();
+            if (city == "Delhi")
+            {
+                DelhiCity.Click();
+            }
+            else if (city == "Gurgaon")
+            {
+                GurgaonCity.Click();
+            }
+            else if (city == "Noida")
+            {
+                NoidaCity.Click();
+            }
+            else
+            {
+                throw new Exception("City must be Delhi/Gurgaon/Noida");
+            }
+        }
+
     }
 }

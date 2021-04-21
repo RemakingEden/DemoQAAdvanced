@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
 using DemoQAAdvanced.helper;
+using DemoQAAdvanced.POCO;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -21,13 +22,15 @@ namespace DemoQAAdvanced.step_definitions
         public IObjectContainer container { get; private set; }
         public IWebDriver driver { get; private set; }
         public IConfiguration config { get; private set; }
+        private readonly ScenarioContext _scenarioContext;
 
-        public PracticeFormSteps(IObjectContainer container)
+        public PracticeFormSteps(IObjectContainer container, ScenarioContext scenarioContext)
         {
             this.container = container;
             driver = container.Resolve<IWebDriver>();
             config = container.Resolve<IConfiguration>();
             PracticeFormPage = new PracticeFormPage(driver);
+            _scenarioContext = scenarioContext;
         }
         
         [When(@"the user clicks the submit button")]
@@ -39,22 +42,44 @@ namespace DemoQAAdvanced.step_definitions
         [When(@"the user enters info into all mandatory fields")]
         public void WhenTheUserEntersInfoIntoAllMandatoryFields()
         {
-
-            PracticeFormPage.FirstName.SendKeys("Foo");
-            PracticeFormPage.LastName.SendKeys("Bar");
-            PracticeFormPage.GenderMale.Click();
-            PracticeFormPage.MobileNumber.SendKeys("0712345678");
-            PracticeFormPage.PictureUpload.SendKeys(TestFolders.GetInputFilePath(@"..\..\..\input\5mbImage.jpg"));
+            _scenarioContext["Type"] = "Mandatory";
+            PracticeFormPage.FirstName.SendKeys(PracticeFormData.FirstName);
+            PracticeFormPage.LastName.SendKeys(PracticeFormData.LastName);
+            PracticeFormPage.Email.SendKeys(PracticeFormData.Email);
+            PracticeFormPage.GenderSelection(PracticeFormData.Gender);
+            PracticeFormPage.MobileNumber.SendKeys(PracticeFormData.MobileNumber);
+            PracticeFormPage.PictureUpload.SendKeys(PracticeFormData.PictureUpload);
         }
 
         [Then(@"the details entered are reflected correctly")]
         public void ThenTheDetailsEnteredAreReflectedCorrectly()
         {
-            // This needs consolidating into one but could not find a way to get regex to do AND rather than OR (|)
-            Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, "Foo Bar"));
-            Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, "Male"));
-            Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, "0712345678"));
-            Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, "5mbImage.jpg"));
+            _scenarioContext.TryGetValue("Type", out var type);
+
+            switch (type)
+            {
+                case "Mandatory":
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, string.Format("{0} {1}", PracticeFormData.FirstName, PracticeFormData.LastName)));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.Gender));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.MobileNumber));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, Regex.Replace(PracticeFormData.PictureUpload, @".+\\", "")));
+                    break;
+                case "All":
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, string.Format("{0} {1}", PracticeFormData.FirstName, PracticeFormData.LastName)));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.Email));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.Gender));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.MobileNumber));
+                    //Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.DOB));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.Subject));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.Hobbies));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, Regex.Replace(PracticeFormData.PictureUpload, @".+\\", "")));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.Address));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.State));
+                    Assert.IsTrue(Regex.IsMatch(PracticeFormPage.ReflectedForm.Text, PracticeFormData.City));
+                    break;
+            }
+
+
         }
 
         [Then(@"all appropriate field validation messages are shown")]
@@ -97,23 +122,20 @@ namespace DemoQAAdvanced.step_definitions
         [When(@"the user enters info into all fields")]
         public void WhenTheUserEntersInfoIntoAllFields()
         {
-            PracticeFormPage.FirstName.SendKeys("Foo");
-            PracticeFormPage.LastName.SendKeys("Bar");
-            PracticeFormPage.Email.SendKeys("foobar@mailinator.com");
-            PracticeFormPage.GenderMale.Click();
-            PracticeFormPage.MobileNumber.SendKeys("0712345678");
-            PracticeFormPage.DOB.Clear();
+            _scenarioContext["Type"] = "All";
+            PracticeFormPage.FirstName.SendKeys(PracticeFormData.FirstName);
+            PracticeFormPage.LastName.SendKeys(PracticeFormData.LastName);
+            PracticeFormPage.Email.SendKeys(PracticeFormData.Email);
+            PracticeFormPage.GenderSelection(PracticeFormData.Gender);
+            PracticeFormPage.MobileNumber.SendKeys(PracticeFormData.MobileNumber);
             // The below date does not work correctly yet
-            PracticeFormPage.DOB.SendKeys("01/01/2000");
-            PracticeFormPage.Subjects.SendKeys("Physics");
-            PracticeFormPage.SubjectsOption1.Click();
-            PracticeFormPage.HobbiesSports.Click();
-            PracticeFormPage.PictureUpload.SendKeys(TestFolders.GetInputFilePath(@"..\..\..\input\5mbImage.jpg"));
-            PracticeFormPage.Address.SendKeys("123 FooBar Street, Manchester, M1 2GF");
-            PracticeFormPage.State.Click();
-            PracticeFormPage.NCRState.Click();
-            PracticeFormPage.City.Click();
-            PracticeFormPage.DelhiCity.Click();
+            PracticeFormPage.DOB.SendKeys(PracticeFormData.DOB);
+            PracticeFormPage.InputSubject(PracticeFormData.Subject);
+            PracticeFormPage.HobbySelection(PracticeFormData.Hobbies);
+            PracticeFormPage.PictureUpload.SendKeys(PracticeFormData.PictureUpload);
+            PracticeFormPage.Address.SendKeys(PracticeFormData.Address);
+            PracticeFormPage.StateSelection(PracticeFormData.State);
+            PracticeFormPage.CitySelection(PracticeFormData.City);
         }
 
         [When(@"the user enters five subjects")]

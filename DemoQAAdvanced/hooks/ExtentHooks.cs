@@ -81,13 +81,13 @@ namespace DemoQAAdvanced.helper
                 switch (stepType)
                 {
                     case "Given":
-                        scenario.CreateNode<Given>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
+                        scenario.CreateNode<Given>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
                         break;
                     case "When":
-                        scenario.CreateNode<When>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
+                        scenario.CreateNode<When>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
                         break;
                     case "And":
-                        scenario.CreateNode<And>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
+                        scenario.CreateNode<And>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
                         break;
                     case "Then":
                         scenario.CreateNode<Then>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
