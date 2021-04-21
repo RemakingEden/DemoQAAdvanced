@@ -1,10 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="output\**" />
+    <EmbeddedResource Remove="output\**" />
+    <None Remove="output\**" />
+    <SpecFlowFeatureFiles Remove="output\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="output\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DotNetSeleniumExtras.PageObjects.Core" Version="3.12.0" />
@@ -25,7 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="output\" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="input\5mbImage.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

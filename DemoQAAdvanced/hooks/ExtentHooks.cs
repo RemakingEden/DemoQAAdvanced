@@ -3,7 +3,6 @@ using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using BoDi;
 using DemoQAAdvanced.helper;
-using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -14,49 +13,42 @@ using TechTalk.SpecFlow;
 namespace RPMI.hooks
 {
     [Binding]
-    public sealed class Hooks
+    public sealed class ExtentHooks
     {
+        private ExtentTest featureName;
         private ExtentTest scenario;
         private static ExtentReports extent;
 
         private readonly ScenarioContext _scenarioContext;
         public IObjectContainer container { get; private set; }
         private IWebDriver driver;
-        public IConfiguration config { get; private set; }
-        public Hooks(IObjectContainer container, ScenarioContext scenarioContext)
+        public ExtentHooks(IObjectContainer container, ScenarioContext scenarioContext)
         {
             this.container = container;
             _scenarioContext = scenarioContext;
-            config = InitConfiguration();
-            container.RegisterInstanceAs<IConfiguration>(config);
         }
 
-        public static IConfiguration InitConfiguration()
-        {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile(@"appsettings.json")
-                .Build();
-            return config;
-        }
-
-        public void SetupChromeDriver()
+        public IWebDriver SetupChromeDriver()
         {
             var chromeOptions = new ChromeOptions();
             //chromeOptions.AddArguments("headless");
             driver = new ChromeDriver(chromeOptions);
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Actions builder = new Actions(driver);
             container.RegisterInstanceAs<IWebDriver>(driver);
+            container.RegisterInstanceAs<Actions>(builder);
+            return driver;
         }
 
-        public void SetupFirefoxDriver()
+        public IWebDriver SetupFirefoxDriver()
         {
             var firefoxOptions = new FirefoxOptions();
             //firefoxOptions.AddArguments("headless");
             driver = new FirefoxDriver(firefoxOptions);
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             container.RegisterInstanceAs<IWebDriver>(driver);
+            return driver;
         }
 
         [BeforeTestRun]
@@ -87,13 +79,13 @@ namespace RPMI.hooks
             switch (browser)
             {
                 case "Chrome":
-                    SetupChromeDriver();
+                    driver = SetupChromeDriver();
                     break;
                 case "Firefox":
-                    SetupFirefoxDriver();
+                    driver = SetupFirefoxDriver();
                     break;
                 default:
-                    SetupChromeDriver();
+                    driver = SetupChromeDriver();
                     break;
             }
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(driver);

@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
 using DemoQAAdvanced.helper;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -18,29 +19,23 @@ namespace RPMI.step_definitions
     public class PracticeFormSteps
     {
 
-        string baseUrl = "https://demoqa.com";
         private PracticeFormPage PracticeFormPage { get; set; }
         public IObjectContainer container { get; private set; }
         public IWebDriver driver { get; private set; }
-        public  Actions builder { get; private set; }
+        public IConfiguration config { get; private set; }
 
         public PracticeFormSteps(IObjectContainer container)
         {
             this.container = container;
             driver = container.Resolve<IWebDriver>();
-            builder = container.Resolve<Actions>();
-        }
-
-        [BeforeScenario]
-        public void SetupSelenium()
-        {
+            config = container.Resolve<IConfiguration>();
             PracticeFormPage = new PracticeFormPage(driver);
-        }    
+        }
 
         [Given(@"a user is on the ""(.*)"" page")]
         public void GivenAUserIsOnThePage(string endpoint)
         {
-            driver.Navigate().GoToUrl(baseUrl + endpoint);
+            driver.Navigate().GoToUrl(config["BaseURL"] + endpoint);
         }
         
         
