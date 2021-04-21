@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using BoDi;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using SeleniumExtras.PageObjects;
 
 namespace DemoQAAdvanced.pages
@@ -6,10 +8,15 @@ namespace DemoQAAdvanced.pages
     public class ToolTipsPage
     {
         private readonly IWebDriver driver;
-        public ToolTipsPage (IWebDriver driver)
+        public IObjectContainer container { get; private set; }
+
+        public Actions action { get; private set; }
+        public ToolTipsPage (IWebDriver driver, IObjectContainer container)
         {
+            this.container = container;
             this.driver = driver;
             PageFactory.InitElements(this.driver, this);
+            action = container.Resolve<Actions>();
 
         }
 
@@ -22,6 +29,14 @@ namespace DemoQAAdvanced.pages
         // Hover Messages
         [FindsBy(How = How.ClassName, Using = "tooltip-inner")]
         public IWebElement ToolTipHoverMessage { get; set; }
+
+        public void HoverElement(IWebElement element)
+        {
+            action
+                .MoveToElement(element)
+                .Build()
+                .Perform();
+        }
 
     }
 }

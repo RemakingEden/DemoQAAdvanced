@@ -17,35 +17,28 @@ namespace DemoQAAdvanced.step_definitions
         public IObjectContainer container { get; private set; }
         public IWebDriver driver { get; private set; }
         public IConfiguration config { get; private set; }
-        public Actions actions { get; private set; }
 
         public ToolTipsSteps(IObjectContainer container)
         {
             this.container = container;
             driver = container.Resolve<IWebDriver>();
             config = container.Resolve<IConfiguration>();
-            ToolTipsPage = new ToolTipsPage(driver);
-            Actions actions = new Actions(driver);
-            this.actions = actions;
+            ToolTipsPage = new ToolTipsPage(driver, container);
         }
 
         [When(@"the user hovers over the button")]
         public void WhenTheUserHoversOverTheButton()
         {
-            actions.MoveToElement(ToolTipsPage.ToolTipButton);
-            actions.Build();
-            actions.Perform();
+            ToolTipsPage.HoverElement(ToolTipsPage.ToolTipButton);
         }
-        
+
         [When(@"the user hovers over the text field")]
         public void WhenTheUserHoversOverTheTextField()
         {
-            actions.MoveToElement(ToolTipsPage.ToolTipTextField);
-            actions.Build();
-            actions.Perform();
+            ToolTipsPage.HoverElement(ToolTipsPage.ToolTipTextField);
         }
 
-        [Then(@"a button hover message is shown")]
+            [Then(@"a button hover message is shown")]
         public void ThenAButtonHoverMessageIsShown()
         {
             Assert.AreEqual("You hovered over the Button", ToolTipsPage.ToolTipHoverMessage.Text);
