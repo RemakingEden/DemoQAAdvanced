@@ -3,52 +3,24 @@ using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using BoDi;
 using DemoQAAdvanced.helper;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Interactions;
-using System;
+using Microsoft.Extensions.Configuration;
 using TechTalk.SpecFlow;
 
-namespace RPMI.hooks
+namespace RPMI.helper
 {
     [Binding]
-    public sealed class ExtentHooks
+    public sealed class ExtentReporting
     {
-        private ExtentTest featureName;
-        private ExtentTest scenario;
         private static ExtentReports extent;
 
         private readonly ScenarioContext _scenarioContext;
         public IObjectContainer container { get; private set; }
-        private IWebDriver driver;
-        public ExtentHooks(IObjectContainer container, ScenarioContext scenarioContext)
+        public IConfiguration config { get; private set; }
+
+        public ExtentReporting(IObjectContainer container)
         {
             this.container = container;
-            _scenarioContext = scenarioContext;
-        }
-
-        public IWebDriver SetupChromeDriver()
-        {
-            var chromeOptions = new ChromeOptions();
-            //chromeOptions.AddArguments("headless");
-            driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            Actions builder = new Actions(driver);
-            container.RegisterInstanceAs<IWebDriver>(driver);
-            container.RegisterInstanceAs<Actions>(builder);
-            return driver;
-        }
-
-        public IWebDriver SetupFirefoxDriver()
-        {
-            var firefoxOptions = new FirefoxOptions();
-            //firefoxOptions.AddArguments("headless");
-            driver = new FirefoxDriver(firefoxOptions);
-            driver.Manage().Window.Maximize();
-            container.RegisterInstanceAs<IWebDriver>(driver);
-            return driver;
+            _scenarioContext = container.Resolve<ScenarioContext>();
         }
 
         [BeforeTestRun]
@@ -59,6 +31,7 @@ namespace RPMI.hooks
 
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
+
         }
 
         [BeforeFeature]
@@ -69,26 +42,11 @@ namespace RPMI.hooks
             context.FeatureContainer.RegisterInstanceAs(featureTest);
         }
 
-        [BeforeScenario(Order = 0)]
+        [BeforeScenario]
         public void BeforeScenario(FeatureContext featureContext, ScenarioContext context)
         {
             var featureTest = featureContext.FeatureContainer.Resolve<ExtentTest>();
-            scenario = featureTest.CreateNode<Scenario>(context.ScenarioInfo.Title);
-            _scenarioContext.TryGetValue("Browser", out var browser);
-
-            switch (browser)
-            {
-                case "Chrome":
-                    driver = SetupChromeDriver();
-                    break;
-                case "Firefox":
-                    driver = SetupFirefoxDriver();
-                    break;
-                default:
-                    driver = SetupChromeDriver();
-                    break;
-            }
-            _scenarioContext.ScenarioContainer.RegisterInstanceAs(driver);
+            var scenario = featureTest.CreateNode<Scenario>(context.ScenarioInfo.Title);
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(scenario);
         }
 
@@ -97,7 +55,7 @@ namespace RPMI.hooks
         public void AfterStep(ScenarioContext context)
         {
             var stepType = context.StepContext.StepInfo.StepDefinitionType.ToString();
-            scenario = context.ScenarioContainer.Resolve<ExtentTest>();
+            var scenario = context.ScenarioContainer.Resolve<ExtentTest>();
 
             if (context.TestError == null)
             {
@@ -123,13 +81,13 @@ namespace RPMI.hooks
                 switch (stepType)
                 {
                     case "Given":
-                        scenario.CreateNode<Given>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
+                        scenario.CreateNode<Given>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
                         break;
                     case "When":
-                        scenario.CreateNode<When>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
+                        scenario.CreateNode<When>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
                         break;
                     case "And":
-                        scenario.CreateNode<And>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
+                        scenario.CreateNode<And>(context.StepContext.StepInfo.Text).Fail(context.TestError.InnerException);
                         break;
                     case "Then":
                         scenario.CreateNode<Then>(context.StepContext.StepInfo.Text).Fail(context.TestError.Message);
@@ -137,12 +95,6 @@ namespace RPMI.hooks
 
                 }
             }
-        }
-
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            driver.Quit();
         }
 
         [AfterTestRun]
