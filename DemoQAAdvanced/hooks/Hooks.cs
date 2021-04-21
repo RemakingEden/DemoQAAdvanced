@@ -19,6 +19,7 @@ namespace DemoQAAdvanced.hooks
         public IObjectContainer container { get; private set; }
         private IWebDriver driver;
         public IConfiguration config { get; private set; }
+        public Actions action { get; private set; }
         private readonly ScenarioContext _scenarioContext;
         public Hooks(IObjectContainer container, ScenarioContext scenarioContext)
         {
@@ -73,6 +74,8 @@ namespace DemoQAAdvanced.hooks
                     SetupChromeDriver();
                     break;
             }
+            action = new Actions(driver);
+            container.RegisterInstanceAs<Actions>(action);
         }
 
         [AfterScenario]
