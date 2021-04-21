@@ -1,5 +1,6 @@
 ﻿using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
+using DemoQAAdvanced.helper;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
@@ -57,7 +58,7 @@ namespace RPMI.step_definitions
             PracticeFormPage.LastName.SendKeys("Bar");
             PracticeFormPage.GenderMale.Click();
             PracticeFormPage.MobileNumber.SendKeys("0712345678");
-            PracticeFormPage.PictureUpload.SendKeys(@"C:\Users\sparkesj\Downloads\5mbImage.jpg");
+            PracticeFormPage.PictureUpload.SendKeys(TestFolders.GetInputFilePath(@"..\..\..\input\5mbImage.jpg"));
         }
 
         [Then(@"the details entered are reflected correctly")]
@@ -121,7 +122,7 @@ namespace RPMI.step_definitions
             PracticeFormPage.Subjects.SendKeys("Physics");
             PracticeFormPage.SubjectsOption1.Click();
             PracticeFormPage.HobbiesSports.Click();
-            PracticeFormPage.PictureUpload.SendKeys(@"C:\Users\sparkesj\Downloads\5mbImage.jpg");
+            PracticeFormPage.PictureUpload.SendKeys(TestFolders.GetInputFilePath(@"..\..\..\input\5mbImage.jpg"));
             PracticeFormPage.Address.SendKeys("123 FooBar Street, Manchester, M1 2GF");
             PracticeFormPage.State.Click();
             PracticeFormPage.NCRState.Click();

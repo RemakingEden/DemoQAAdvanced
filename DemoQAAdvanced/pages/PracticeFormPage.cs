@@ -7,7 +7,6 @@ namespace RPMI.pages
     {
         private readonly IWebDriver driver;
 
-
         public PracticeFormPage(IWebDriver driver)
         {
             this.driver = driver;

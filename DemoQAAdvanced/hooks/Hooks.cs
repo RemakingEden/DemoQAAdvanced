@@ -2,6 +2,7 @@
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using BoDi;
+using DemoQAAdvanced.helper;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -53,7 +54,7 @@ namespace RPMI.hooks
         [BeforeTestRun]
         public static void InitialiseReport()
         {
-            var htmlReporter = new ExtentHtmlReporter(@"C:\development\RPMI\RPMI\RPMI\output\ExtentReport.html");
+            var htmlReporter = new ExtentHtmlReporter(TestFolders.GetOutputFilePath("ExtentReport.html"));
             htmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
 
             extent = new ExtentReports();
