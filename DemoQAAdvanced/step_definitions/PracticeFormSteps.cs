@@ -46,17 +46,7 @@ namespace RPMI.step_definitions
         [When(@"the user clicks the submit button")]
         public void WhenTheUserClicksTheSubmitButton()
         {
-
-            // Maybe rethink this?
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
-            PracticeFormPage.SubmitBtn.Click();
-        }
-        
-        [Then(@"a login error is shown")]
-        public void ThenALoginErrorIsShown()
-        {
-            //Assert.True(PracticeFormPage.ErrorMessage.Displayed);
+            PracticeFormPage.ClickSubmitBtn();
         }
 
         [When(@"the user enters info into all mandatory fields")]
@@ -142,16 +132,11 @@ namespace RPMI.step_definitions
         [When(@"the user enters five subjects")]
         public void WhenTheUserEntersFiveSubjects()
         {
-            PracticeFormPage.Subjects.SendKeys("Physics");
-            PracticeFormPage.SubjectsOption1.Click();
-            PracticeFormPage.Subjects.SendKeys("English");
-            PracticeFormPage.SubjectsOption1.Click();
-            PracticeFormPage.Subjects.SendKeys("Accounting");
-            PracticeFormPage.SubjectsOption1.Click();
-            PracticeFormPage.Subjects.SendKeys("Chemistry");
-            PracticeFormPage.SubjectsOption1.Click();
-            PracticeFormPage.Subjects.SendKeys("Maths");
-            PracticeFormPage.SubjectsOption1.Click();
+            PracticeFormPage.InputSubject("Physics");
+            PracticeFormPage.InputSubject("English");
+            PracticeFormPage.InputSubject("Accounting");
+            PracticeFormPage.InputSubject("Chemistry");
+            PracticeFormPage.InputSubject("Maths");
         }
 
         [When(@"the user deletes two subjects individually")]

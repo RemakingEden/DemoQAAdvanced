@@ -75,5 +75,18 @@ namespace RPMI.pages
         // Reflected details
         [FindsBy(How = How.ClassName, Using = "modal-body")]
         public IWebElement ReflectedForm { get; set; }
+
+        public void ClickSubmitBtn()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+            this.SubmitBtn.Click();
+        }
+
+        public void InputSubject(string subject)
+        {
+            this.Subjects.SendKeys(subject);
+            this.SubjectsOption1.Click();
+        }
     }
 }
