@@ -33,7 +33,7 @@ namespace DemoQAAdvanced.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "features", "Practice Form", "  As a user\r\n  I want to be able to complete a form, so that I am able to send de" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Practice Form", "  As a user\r\n  I want to be able to complete a form, so that I am able to send de" +
                     "tails to the site", ProgrammingLanguage.CSharp, new string[] {
                         "Browser:Chrome"});
             testRunner.OnFeatureStart(featureInfo);

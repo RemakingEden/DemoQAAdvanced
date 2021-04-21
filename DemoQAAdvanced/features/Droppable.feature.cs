@@ -33,7 +33,7 @@ namespace DemoQAAdvanced.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "features", "Droppable", "  As a user\r\n  I want to be able to drag an element, so that I am able to move it" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Droppable", "  As a user\r\n  I want to be able to drag an element, so that I am able to move it" +
                     " on the page", ProgrammingLanguage.CSharp, new string[] {
                         "Browser:Chrome"});
             testRunner.OnFeatureStart(featureInfo);

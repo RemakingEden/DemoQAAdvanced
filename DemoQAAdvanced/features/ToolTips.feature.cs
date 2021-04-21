@@ -33,7 +33,7 @@ namespace DemoQAAdvanced.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "features", "Tool Tips", "  As a user\r\n  I want to be able to hover over elements, so that I am able to see" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Tool Tips", "  As a user\r\n  I want to be able to hover over elements, so that I am able to see" +
                     " a message", ProgrammingLanguage.CSharp, new string[] {
                         "Browser:Chrome"});
             testRunner.OnFeatureStart(featureInfo);

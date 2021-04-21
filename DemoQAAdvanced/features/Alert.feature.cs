@@ -33,7 +33,7 @@ namespace DemoQAAdvanced.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "features", "Alert", "  As a user\r\n  I want to be able to click on a button, so that I am able to see a" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Alert", "  As a user\r\n  I want to be able to click on a button, so that I am able to see a" +
                     "n alert", ProgrammingLanguage.CSharp, new string[] {
                         "Browser:Chrome"});
             testRunner.OnFeatureStart(featureInfo);

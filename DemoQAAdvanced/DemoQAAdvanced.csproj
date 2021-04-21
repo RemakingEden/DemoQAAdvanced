@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="features\Alert - Copy.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="features\PracticeForm - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Alert - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\PracticeForm - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,13 +38,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="features\Droppable.feature.cs">
+    <Compile Update="Features\Droppable.feature.cs">
       <DependentUpon>Droppable.feature</DependentUpon>
     </Compile>
-    <Compile Update="features\ToolTips.feature.cs">
+    <Compile Update="Features\ToolTips.feature.cs">
       <DependentUpon>ToolTips.feature</DependentUpon>
     </Compile>
-    <Compile Update="features\Alert.feature.cs">
+    <Compile Update="Features\Alert.feature.cs">
       <DependentUpon>Alert.feature</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -53,21 +53,21 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="input\5mbImage.jpg">
+    <None Update="Input\5mbImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="features\Droppable.feature">
+    <SpecFlowFeatureFiles Update="Features\Droppable.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="features\ToolTips.feature">
+    <SpecFlowFeatureFiles Update="Features\ToolTips.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
-    <SpecFlowFeatureFiles Update="features\Alert.feature">
+    <SpecFlowFeatureFiles Update="Features\Alert.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
