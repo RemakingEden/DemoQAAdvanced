@@ -1,9 +1,6 @@
-﻿using BoDi;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
-using System.Threading;
 
 namespace DemoQAAdvanced.pages
 {
