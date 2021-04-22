@@ -1,4 +1,5 @@
 ﻿using BoDi;
+using DemoQAAdvanced.Helpers;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -17,40 +18,14 @@ namespace DemoQAAdvanced.hooks
         public IConfiguration config { get; private set; }
         public Actions action { get; private set; }
         private readonly ScenarioContext _scenarioContext;
+        private readonly DriverSetup driverSetup;
         public Hooks(IObjectContainer container, ScenarioContext scenarioContext)
         {
             this.container = container;
-            config = InitConfiguration();
-            container.RegisterInstanceAs<IConfiguration>(config);
+            config = ConfigurationSetup.InitConfiguration();
+            container.RegisterInstanceAs(config);
             _scenarioContext = scenarioContext;
-        }
-
-        public static IConfiguration InitConfiguration()
-        {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile(@"appsettings.json")
-                .Build();
-            return config;
-        }
-
-        public void SetupChromeDriver()
-        {
-            var chromeOptions = new ChromeOptions();
-            //chromeOptions.AddArguments("headless");
-            driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            container.RegisterInstanceAs<IWebDriver>(driver);
-        }
-
-        public void SetupFirefoxDriver()
-        {
-            var firefoxOptions = new FirefoxOptions();
-            //firefoxOptions.AddArguments("headless");
-            driver = new FirefoxDriver(firefoxOptions);
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            container.RegisterInstanceAs<IWebDriver>(driver);
+            driverSetup = new DriverSetup();
         }
 
         [BeforeScenario]
@@ -61,17 +36,18 @@ namespace DemoQAAdvanced.hooks
             switch (browser)
             {
                 case "Chrome":
-                    SetupChromeDriver();
+                    driver = driverSetup.SetupChromeDriver();
                     break;
                 case "Firefox":
-                    SetupFirefoxDriver();
+                    driver = driverSetup.SetupFirefoxDriver();
                     break;
                 default:
-                    SetupChromeDriver();
+                    driver = driverSetup.SetupChromeDriver();
                     break;
             }
+            container.RegisterInstanceAs(driver);
             action = new Actions(driver);
-            container.RegisterInstanceAs<Actions>(action);
+            container.RegisterInstanceAs(action);
         }
 
         [AfterScenario]
