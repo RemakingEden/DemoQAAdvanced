@@ -15,7 +15,7 @@ namespace DemoQAAdvanced.POCO
         public static string DOB { get; } = "01/01/2000";
         public static string Subject { get; } = "Physics";
         public static string Hobbies { get; } = "Sports";
-        public static string PictureUpload { get; } = TestFolders.GetInputFilePath(@"..\..\..\input\5mbImage.jpg");
+        public static string PictureUpload { get; } = TestFolders.GetInputFilePath(@"input/5mbImage.jpg");
         public static string Address { get; } = "123 FooBar Street, Manchester, M1 2GF";
         public static string State { get; } = "NCR";
         public static string City { get; } = "Delhi";
