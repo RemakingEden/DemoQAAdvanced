@@ -129,7 +129,7 @@ namespace DemoQAAdvanced.step_definitions
             PracticeFormPage.GenderSelection(PracticeFormData.Gender);
             PracticeFormPage.MobileNumber.SendKeys(PracticeFormData.MobileNumber);
             // The below date does not work correctly yet
-            PracticeFormPage.DOB.SendKeys(PracticeFormData.DOB);
+            PracticeFormPage.DOBSelection(PracticeFormData.DOB);
             PracticeFormPage.InputSubject(PracticeFormData.Subject);
             PracticeFormPage.HobbySelection(PracticeFormData.Hobbies);
             PracticeFormPage.PictureUpload.SendKeys(PracticeFormData.PictureUpload);

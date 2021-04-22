@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
+using System.Threading;
 
 namespace DemoQAAdvanced.pages
 {
@@ -185,6 +186,19 @@ namespace DemoQAAdvanced.pages
             {
                 throw new Exception("City must be Delhi/Gurgaon/Noida");
             }
+        }
+
+        public void DOBSelection(string dob)
+        {
+            var x = 1;
+            while (x < 11)
+            {
+                DOB.SendKeys(Keys.Backspace);
+                x += 1;
+            }
+            Thread.Sleep(1000);
+            DOB.SendKeys(dob);
+            DOB.SendKeys(Keys.Enter);
         }
 
     }
