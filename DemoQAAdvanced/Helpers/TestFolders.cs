@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
-namespace DemoQAAdvanced.helper
+namespace DemoQAAdvanced.Helpers
 {
     internal static class TestFolders
     {

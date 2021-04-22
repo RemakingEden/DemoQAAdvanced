@@ -1,13 +1,11 @@
 ﻿using BoDi;
-using DemoQAAdvanced.pages;
+using DemoQAAdvanced.Pages;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System;
 using TechTalk.SpecFlow;
 
-namespace DemoQAAdvanced.step_definitions
+namespace DemoQAAdvanced.StepDefinitions
 {
     [Binding]
     public class ToolTipsSteps

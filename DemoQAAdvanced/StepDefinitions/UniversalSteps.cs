@@ -1,17 +1,10 @@
 ﻿using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
-using DemoQAAdvanced.helper;
 using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using DemoQAAdvanced.pages;
-using System.Text.RegularExpressions;
-using System.Threading;
 using TechTalk.SpecFlow;
 
-namespace DemoQAAdvanced.step_definitions
+namespace DemoQAAdvanced.StepDefinitions
 {
     [Binding]
     public class UniversalSteps

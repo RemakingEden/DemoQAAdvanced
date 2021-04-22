@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace DemoQAAdvanced.pages
+namespace DemoQAAdvanced.Pages
 {
     public class DroppablePage
     {

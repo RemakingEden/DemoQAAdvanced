@@ -2,7 +2,7 @@
 using SeleniumExtras.PageObjects;
 using System;
 
-namespace DemoQAAdvanced.pages
+namespace DemoQAAdvanced.Pages
 {
     public class DatePickerPage
     {

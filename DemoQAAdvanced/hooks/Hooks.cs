@@ -2,13 +2,9 @@
 using DemoQAAdvanced.Helpers;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Interactions;
-using System;
 using TechTalk.SpecFlow;
 
-namespace DemoQAAdvanced.hooks
+namespace DemoQAAdvanced.Hooks
 {
     [Binding]
     public sealed class Hooks

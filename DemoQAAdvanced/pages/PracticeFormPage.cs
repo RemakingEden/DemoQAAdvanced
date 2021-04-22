@@ -1,11 +1,9 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Threading;
 
-namespace DemoQAAdvanced.pages
+namespace DemoQAAdvanced.Pages
 {
     public class PracticeFormPage
     {

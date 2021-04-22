@@ -1,7 +1,4 @@
-﻿using DemoQAAdvanced.helper;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DemoQAAdvanced.Helpers;
 
 namespace DemoQAAdvanced.POCO
 {

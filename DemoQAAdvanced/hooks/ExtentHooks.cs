@@ -2,11 +2,11 @@
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using BoDi;
-using DemoQAAdvanced.helper;
+using DemoQAAdvanced.Helpers;
 using Microsoft.Extensions.Configuration;
 using TechTalk.SpecFlow;
 
-namespace DemoQAAdvanced.helper
+namespace DemoQAAdvanced.Hooks
 {
     [Binding]
     public sealed class ExtentReporting

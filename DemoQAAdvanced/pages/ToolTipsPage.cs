@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using SeleniumExtras.PageObjects;
 
-namespace DemoQAAdvanced.pages
+namespace DemoQAAdvanced.Pages
 {
     public class ToolTipsPage
     {

@@ -1,15 +1,14 @@
 ﻿using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
-using DemoQAAdvanced.pages;
+using DemoQAAdvanced.Pages;
 using DemoQAAdvanced.POCO;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Text.RegularExpressions;
-using System.Threading;
 using TechTalk.SpecFlow;
 
-namespace DemoQAAdvanced.step_definitions
+namespace DemoQAAdvanced.StepDefinitions
 {
     [Binding]
     public class PracticeFormSteps
