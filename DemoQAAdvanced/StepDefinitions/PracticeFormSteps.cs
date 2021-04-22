@@ -1,13 +1,10 @@
 ﻿using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
-using DemoQAAdvanced.helper;
+using DemoQAAdvanced.pages;
 using DemoQAAdvanced.POCO;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using DemoQAAdvanced.pages;
 using System.Text.RegularExpressions;
 using System.Threading;
 using TechTalk.SpecFlow;
@@ -85,8 +82,7 @@ namespace DemoQAAdvanced.step_definitions
         [Then(@"all appropriate field validation messages are shown")]
         public void ThenAllAppropriateFieldValidationMessagesAreShown()
         {
-            // Need a more graceful way than Thread
-            Thread.Sleep(500);
+            PracticeFormPage.WaitForValidation(PracticeFormPage.FirstName);
             Assert.AreEqual("rgb(220, 53, 69)", PracticeFormPage.FirstName.GetCssValue("border-color"));
             Assert.AreEqual("rgb(220, 53, 69)", PracticeFormPage.LastName.GetCssValue("border-color"));
             Assert.AreEqual("rgba(220, 53, 69, 1)", PracticeFormPage.GenderMale.GetCssValue("color"));
@@ -102,7 +98,7 @@ namespace DemoQAAdvanced.step_definitions
         [Then(@"the email field validation is shown")]
         public void ThentheEmailFieldValidationIsShown()
         {
-            Thread.Sleep(500);
+            PracticeFormPage.WaitForValidation(PracticeFormPage.Email);
             Assert.AreEqual("rgb(220, 53, 69)", PracticeFormPage.Email.GetCssValue("border-color"));
         }
 
@@ -115,7 +111,7 @@ namespace DemoQAAdvanced.step_definitions
         [Then(@"the phone number fields validation is shown")]
         public void ThenThePhoneNumberFieldsValidationIsShown()
         {
-            Thread.Sleep(500);
+            PracticeFormPage.WaitForValidation(PracticeFormPage.MobileNumber);
             Assert.AreEqual("rgb(220, 53, 69)", PracticeFormPage.MobileNumber.GetCssValue("border-color"));
         }
 

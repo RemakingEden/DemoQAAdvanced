@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Threading;
@@ -89,6 +91,29 @@ namespace DemoQAAdvanced.pages
         // Reflected details
         [FindsBy(How = How.ClassName, Using = "modal-body")]
         public IWebElement ReflectedForm { get; set; }
+
+        public void WaitForValidation(IWebElement field)
+        {
+            var x = 0;
+            // Timeout is measured in 250 milliseconds
+            var timeout = 40;
+            while (x <= timeout)
+            {
+
+                if ("rgb(220, 53, 69)" == field.GetCssValue("border-color")){
+                    break;
+                }
+                else
+                {
+                    Thread.Sleep(250);
+                    x += 1;
+                    continue;
+                }
+            } 
+            if (x == timeout + 1){
+                throw new Exception("Red validation highlight was not displayed");
+            }
+        }
 
         public void ClickSubmitBtn()
         {
@@ -200,6 +225,5 @@ namespace DemoQAAdvanced.pages
             DOB.SendKeys(dob);
             DOB.SendKeys(Keys.Enter);
         }
-
     }
 }
