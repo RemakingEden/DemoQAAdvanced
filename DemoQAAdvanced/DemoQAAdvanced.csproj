@@ -45,6 +45,9 @@
     <Compile Update="Features\ModalDialogs.feature.cs">
       <DependentUpon>ModalDialogs.feature</DependentUpon>
     </Compile>
+    <Compile Update="Features\DatePicker.feature.cs">
+      <DependentUpon>DatePicker.feature</DependentUpon>
+    </Compile>
     <Compile Update="Features\ToolTips.feature.cs">
       <DependentUpon>ToolTips.feature</DependentUpon>
     </Compile>
@@ -68,6 +71,10 @@
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\ModalDialogs.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\DatePicker.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

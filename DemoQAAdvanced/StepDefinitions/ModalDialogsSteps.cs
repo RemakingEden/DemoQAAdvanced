@@ -6,6 +6,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 
@@ -51,6 +52,7 @@ namespace DemoQAAdvanced.StepDefinitions
         [Then(@"a small modal is no longer showing")]
         public void ThenASmallModalIsNoLongerShowing()
         {
+            Thread.Sleep(500);
             var exception = Assert.Throws<NoSuchElementException>(() => ModalDialogsPage.SmallModalClose.Click());
             Assert.IsTrue(Regex.IsMatch(exception.Message, "Could not find element by: By.Id: closeSmallModal"));
         }
