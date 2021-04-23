@@ -15,7 +15,7 @@ Install DotNet Core 3.1.0
 
 
 ## Usage
-Using Powershell navigate to the cloned folder
+Navigate to the cloned folder
 
 ```
 cd DemoQAAdvanced
